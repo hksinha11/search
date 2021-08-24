@@ -1,5 +1,6 @@
 package com.movies.search.controllers;
 
+import com.movies.search.exception.UnsupportedColumnException;
 import com.movies.search.helper.CSVHelper;
 import com.movies.search.message.ResponseMessage;
 import com.movies.search.models.Movies;
@@ -23,8 +24,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Objects;
+
 @Controller
 @RequestMapping("/api/")
 @Slf4j
@@ -38,8 +40,6 @@ public class MoviesController {
         log.info("Uploading file {}", file.getOriginalFilename());
         if (CSVHelper.hasCSVFormat(file)) {
             try {
-                String s = null;
-                s.getBytes(StandardCharsets.UTF_8);
                 movieService.save(file);
 
                 message = "Uploaded the file successfully: " + file.getOriginalFilename();
@@ -91,14 +91,17 @@ public class MoviesController {
 
             }) Specification<Movies> spec,
             Sort sort,
-            @RequestHeader HttpHeaders headers) {
+            @RequestHeader HttpHeaders headers) throws UnsupportedColumnException {
+        if (Objects.isNull(spec)) {
+            throw new UnsupportedColumnException("Unsupported column name");
+        }
         log.info("The search with various parameters and the and close {} ", spec.toString());
         final PagingResponse response = movieService.get(spec, headers, sort);
         return new ResponseEntity<>(response.getElements(), returnHttpHeaders(response), HttpStatus.OK);
     }
 
     public HttpHeaders returnHttpHeaders(PagingResponse response) {
-        log.info("Pagination headers set", response.toString());
+        log.info("Pagination headers set {}", response.toString());
         HttpHeaders headers = new HttpHeaders();
         headers.set(PagingHeaders.COUNT.getName(), String.valueOf(response.getCount()));
         headers.set(PagingHeaders.PAGE_SIZE.getName(), String.valueOf(response.getPageSize()));
