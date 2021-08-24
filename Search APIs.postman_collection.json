@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "d354d767-19c1-429c-bcb2-5f3bb9109335",
+		"name": "Search APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/api/upload",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/harshitsinha/Downloads/netflix_titles.csv"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"upload"
+					],
+					"query": [
+						{
+							"key": "file",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/movies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/search?type=Movie",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Page-Size",
+						"value": "10",
+						"type": "text"
+					},
+					{
+						"key": "Page-Number",
+						"value": "0",
+						"type": "text"
+					},
+					{
+						"key": "Page-Offset",
+						"value": "0",
+						"type": "text"
+					},
+					{
+						"key": "Page-Total",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Count",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/harshitsinha/Downloads/netflix_titles.csv"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/search?type=Movie&title=3022",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "Movie"
+						},
+						{
+							"key": "title",
+							"value": "3022"
+						},
+						{
+							"key": "file",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
