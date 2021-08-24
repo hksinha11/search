@@ -71,7 +71,7 @@ public class MoviesController {
     @Transactional
     @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Movies>> getAnd(
+    public ResponseEntity<List<Movies>> get(
             @And({
                     @Spec(path = "showid", params = "showid", spec = Equal.class),
                     @Spec(path = "type", params = "type", spec = LikeIgnoreCase.class),
@@ -88,7 +88,7 @@ public class MoviesController {
             }) Specification<Movies> spec,
             Sort sort,
             @RequestHeader HttpHeaders headers) {
-        final PagingResponse response = movieService.getAnd(spec, headers, sort);
+        final PagingResponse response = movieService.get(spec, headers, sort);
         return new ResponseEntity<>(response.getElements(), returnHttpHeaders(response), HttpStatus.OK);
     }
 
@@ -112,7 +112,7 @@ public class MoviesController {
             }) Specification<Movies> spec,
             Sort sort,
             @RequestHeader HttpHeaders headers) {
-        final PagingResponse response = movieService.getOr(spec, headers, sort);
+        final PagingResponse response = movieService.get(spec, headers, sort);
         return new ResponseEntity<>(response.getElements(), returnHttpHeaders(response), HttpStatus.OK);
     }
 

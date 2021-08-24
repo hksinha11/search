@@ -47,7 +47,7 @@ public class MovieService {
     }
 
 
-    public PagingResponse getAnd(Specification<Movies> spec, HttpHeaders headers, Sort sort) {
+    public PagingResponse get(Specification<Movies> spec, HttpHeaders headers, Sort sort) {
         if (isRequestPaged(headers)) {
             return get(spec, buildPageRequest(headers, sort));
         } else {
@@ -56,14 +56,6 @@ public class MovieService {
         }
     }
 
-    public PagingResponse getOr(Specification<Movies> spec, HttpHeaders headers, Sort sort) {
-        if (isRequestPaged(headers)) {
-            return get(spec, buildPageRequest(headers, sort));
-        } else {
-            List<Movies> entities = get(spec, sort);
-            return new PagingResponse((long) entities.size(), 0L, 0L, 0L, 0L, entities);
-        }
-    }
 
     public List<Movies> get(Specification<Movies> spec, Sort sort) {
         return movieRepository.findAll(spec, sort);
