@@ -19,51 +19,40 @@ public class Movies {
     // Column names : showid, type, title, director, cast, country
     // date added, release_year, duration, listed_in, description
     @Id
-    @Column(name = "showid")
-    @Getter private String showId;
+    @Column(name = "show_id")
+    private String showid;
 
     @Column(name = "type")
-    @Getter @Setter
     private String type;
 
     @Column(name = "title")
-    @Getter @Setter
     private String title;
 
     @Column(name = "director")
-    @Getter @Setter
     private String director;
 
-    @Column(name = "cast")
-    @Getter @Setter
+    @Column(name = "cast", columnDefinition="VARCHAR(6000)")
     private String cast;
 
     @Column(name = "country")
-    @Getter @Setter
     private String country;
 
     @Column(name = "date_added")
-    @Getter @Setter
-    private String date_added;
+    private String dateAdded;
 
     @Column(name = "release_year")
-    @Getter @Setter
-    private String release_year;
+    private String releaseYear;
 
     @Column(name = "rating")
-    @Getter @Setter
     private String rating;
 
     @Column(name = "duration")
-    @Getter @Setter
     private String duration;
 
     @Column(name = "listed_in")
-    @Getter @Setter
-    private String listed_in;
+    private String listedIn;
 
-    @Column(name = "description")
-    @Getter @Setter
+    @Column(name = "description", columnDefinition="VARCHAR(9000)")
     private String description;
 
 }

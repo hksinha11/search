@@ -38,7 +38,7 @@ public class CSVHelper {
 
             for (CSVRecord csvRecord : csvRecords) {
                 Movies movie = new Movies(
-                        csvRecord.get("showid"),
+                        csvRecord.get("show_id"),
                         csvRecord.get("type"),
                         csvRecord.get("title"),
                         csvRecord.get("director"),
@@ -54,7 +54,6 @@ public class CSVHelper {
 
                 movies.add(movie);
             }
-            System.out.println("andar aaya!");
 
             return movies;
         } catch (IOException e) {
