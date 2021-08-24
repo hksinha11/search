@@ -1,4 +1,4 @@
 # search
 search api for movies
 
-Added the postman collection for api requests.
+Added the postman collection json for api requests.
