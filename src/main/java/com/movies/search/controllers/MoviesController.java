@@ -9,7 +9,6 @@ import com.movies.search.services.MovieService;
 import net.kaczmarzyk.spring.data.jpa.domain.Equal;
 import net.kaczmarzyk.spring.data.jpa.domain.LikeIgnoreCase;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.And;
-import net.kaczmarzyk.spring.data.jpa.web.annotation.Or;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -91,33 +90,6 @@ public class MoviesController {
         final PagingResponse response = movieService.get(spec, headers, sort);
         return new ResponseEntity<>(response.getElements(), returnHttpHeaders(response), HttpStatus.OK);
     }
-
-    @Transactional
-    @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Movies>> getOr(
-            @Or({
-                    @Spec(path = "showid", params = "showid", spec = Equal.class),
-                    @Spec(path = "type", params = "type", spec = LikeIgnoreCase.class),
-                    @Spec(path = "title", params = "title", spec = LikeIgnoreCase.class),
-                    @Spec(path = "director", params = "director", spec = LikeIgnoreCase.class),
-                    @Spec(path = "cast", params = "cast", spec = LikeIgnoreCase.class),
-                    @Spec(path = "country", params = "country", spec = LikeIgnoreCase.class),
-                    @Spec(path = "date_added", params = "date_added", spec = LikeIgnoreCase.class),
-                    @Spec(path = "release_year", params = "release_year", spec = LikeIgnoreCase.class),
-                    @Spec(path = "duration", params = "duration", spec = LikeIgnoreCase.class),
-                    @Spec(path = "listed_in", params = "listed_in", spec = LikeIgnoreCase.class),
-                    @Spec(path = "description", params = "description", spec = LikeIgnoreCase.class)
-
-            }) Specification<Movies> spec,
-            Sort sort,
-            @RequestHeader HttpHeaders headers) {
-        final PagingResponse response = movieService.get(spec, headers, sort);
-        return new ResponseEntity<>(response.getElements(), returnHttpHeaders(response), HttpStatus.OK);
-    }
-
-
-
 
     public HttpHeaders returnHttpHeaders(PagingResponse response) {
         HttpHeaders headers = new HttpHeaders();
